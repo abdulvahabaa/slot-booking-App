@@ -71,7 +71,7 @@ const TabViewer = () => {
           severity: "error",
           summary: "Failed",
           detail: "Booking failed. Try again!",
-          life: 3000,
+          life: 2000,
         });
       }
     } catch (error) {
@@ -79,7 +79,7 @@ const TabViewer = () => {
         severity: "error",
         summary: "Error",
         detail: "Server error. Please try later.",
-        life: 3000,
+        life: 2000,
       });
     }
   };

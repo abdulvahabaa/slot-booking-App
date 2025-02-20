@@ -26,7 +26,7 @@ const TimeCard = ({ time, status, date, onBook }) => {
         severity: "warn",
         summary: "Missing Info",
         detail: "Please fill in both Name and Phone Number.",
-        life: 3000,
+        life: 2000,
       });
       return;
     }
