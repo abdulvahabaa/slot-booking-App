@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
-import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { ConfirmDialog } from "primereact/confirmdialog";
 import { Toast } from "primereact/toast";
 
 const TimeCard = ({ time, status, date, onBook }) => {

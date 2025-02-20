@@ -65,6 +65,12 @@ const TabViewer = () => {
           detail: `Slot booked for ${formattedDate} at ${formattedTime}`,
           life: 3000,
         });
+
+        setAvailableSlots((prevSlots) =>
+          prevSlots.filter((slot) => slot !== timeSlot)
+        );
+
+        fetchAvailableSlots(formattedDate);
       } else {
         toast.current.show({
           severity: "error",
@@ -102,7 +108,9 @@ const TabViewer = () => {
                   key={idx}
                   time={time}
                   status={
-                    availableSlots.includes(time) ? "Available" : "Not Available"
+                    availableSlots.includes(time)
+                      ? "Available"
+                      : "Not Available"
                   }
                   date={date}
                   onBook={handleBookSlot}
