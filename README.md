@@ -8,6 +8,9 @@ This is a frontend for an appointment slot booking system.
     <img src="https://img.shields.io/badge/-Tailwind_CSS-black?style=for-the-badge&logoColor=black&logo=tailwindcss&color=06B6D4" alt="tailwindcss" />
   </div>
 
+ <img src="./public/image1.png">
+ <img src="./public/image2.png">
+
 ## 📋 <a name="table">Table of Contents</a>
 
 1. 🤖 [Introduction](#introduction)
