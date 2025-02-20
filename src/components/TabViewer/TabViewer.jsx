@@ -21,7 +21,7 @@ const TabViewer = () => {
       );
       const data = await response.json();
       setAvailableSlots(data.availableSlots);
-      console.log("Fetched available slots:", data.availableSlots);
+      // console.log("Fetched available slots:", data.availableSlots);
     } catch (error) {
       console.error("Error fetching slots:", error);
     }
@@ -30,7 +30,7 @@ const TabViewer = () => {
   useEffect(() => {
     const selectedDate = dateTabs[activeIndex].split("/").reverse().join("-");
     fetchAvailableSlots(selectedDate);
-  }, [activeIndex]);
+  }, [activeIndex, dateTabs]);
 
   const handleBookSlot = async (date, timeSlot, name, phone) => {
     const [day, month, year] = date.split("/");
@@ -66,7 +66,7 @@ const TabViewer = () => {
           prevSlots.filter((slot) => slot !== timeSlot)
         );
         fetchAvailableSlots(formattedDate);
-      } else {
+      } else { 
         toast.current.show({
           severity: "error",
           summary: "Failed",
