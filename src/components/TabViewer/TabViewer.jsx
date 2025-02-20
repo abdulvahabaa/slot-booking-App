@@ -32,16 +32,14 @@ const TabViewer = () => {
     fetchAvailableSlots(selectedDate);
   }, [activeIndex]);
 
-  const handleBookSlot = async (date, timeSlot) => {
-    // Convert Date: DD/MM/YYYY -> YYYY-MM-DD
+  const handleBookSlot = async (date, timeSlot, name, phone) => {
     const [day, month, year] = date.split("/");
     const formattedDate = `${year}-${month}-${day}`;
-
     const formattedTime = timeSlot.replace(/\s?(AM|PM)/i, "");
 
     const bookingData = {
-      name: "Abdul Vahab",
-      phone: "1234567890",
+      name,
+      phone,
       date: formattedDate,
       timeSlot: formattedTime,
     };
@@ -51,9 +49,7 @@ const TabViewer = () => {
         "http://localhost:9002/api/appointments/book",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(bookingData),
         }
       );
@@ -69,7 +65,6 @@ const TabViewer = () => {
         setAvailableSlots((prevSlots) =>
           prevSlots.filter((slot) => slot !== timeSlot)
         );
-
         fetchAvailableSlots(formattedDate);
       } else {
         toast.current.show({
