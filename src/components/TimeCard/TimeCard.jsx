@@ -1,17 +1,56 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
+import { ConfirmDialog, confirmDialog } from "primereact/confirmdialog";
+import { Toast } from "primereact/toast";
 
 const TimeCard = ({ time, status, date, onBook }) => {
+  const toast = useRef(null);
+  const [selectedSlot, setSelectedSlot] = useState(null);
+  const [visible, setVisible] = useState(false);
+
   const handleClick = () => {
-    onBook(date, time);
+    setSelectedSlot({ date, time });
+    setVisible(true);
   };
 
-  const statusColor =
-    status === "Available" ? "text-green-500" : "text-red-500";
+  const handleConfirm = () => {
+    if (selectedSlot) {
+      onBook(selectedSlot.date, selectedSlot.time);
+      toast.current.show({
+        severity: "success",
+        summary: "Confirmed",
+        detail: `Slot booked for ${selectedSlot.date} at ${selectedSlot.time}`,
+        life: 3000,
+      });
+    }
+    setVisible(false);
+  };
+
+  const handleReject = () => {
+    toast.current.show({
+      severity: "warn",
+      summary: "Cancelled",
+      detail: "Booking was cancelled.",
+      life: 3000,
+    });
+    setVisible(false);
+  };
+
+  const statusColor = status === "Available" ? "text-green-500" : "text-red-500";
 
   return (
     <div className="card flex justify-content-center dark:bg-gray-700 p-3">
+      <Toast ref={toast} />
+      <ConfirmDialog
+        visible={visible}
+        onHide={() => setVisible(false)}
+        message={`Do you want to book the slot for ${date} at ${time}?`}
+        header="Confirm Booking"
+        icon="pi pi-exclamation-triangle"
+        accept={handleConfirm}
+        reject={handleReject}
+      />
       <Card
         title={time}
         subTitle={<span className={statusColor}>{status}</span>}
